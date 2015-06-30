@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="tutorial">
+<head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<title>Shopper World!</title>
+<body>
+<md-toolbar>
+      <div class="md-toolbar-tools">        
+        <h1><span>Welcome to Shopper World</span></h1>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+  
+
+  <h2>Products</h2>
+
+  <div ng-controller="StoreController as store">
+
+    <md-grid-list
+        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+    <md-grid-tile class="green" ng-repeat="product in store.products">
+    <md-icon md-svg-src="{{product.icon}}" style="height: 80px; width: 80px;"></md-icon>
+      <md-grid-tile-footer style="height: 100px;">
+        <h3>
+          {{product.name}}
+        </h3>
+        <h3>
+          ${{product.price}} 
+        </h3>  
+        <h3>
+          <md-button class="md-raised md-primary" ng-show="product.isAvailable">Add to Cart</md-button>
+        </h3>        
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+    
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+  <script type="text/javascript" src="app6.js"></script>
+</body>
+</html>

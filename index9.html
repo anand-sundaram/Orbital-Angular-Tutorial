@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html ng-app="tutorial">
+<head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<title>Shopper World!</title>
+<body>
+<md-toolbar>
+      <div class="md-toolbar-tools">        
+        <h1><span>Welcome to Shopper World</span></h1>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+  
+
+  <div ng-controller="StoreController as store" style="padding: 20px;">
+    
+    <h3>Today is {{ store.date | date:'EEEE, dd MMMM yy'}} </h3>
+
+    <h2>Products</h2>
+
+    <md-grid-list
+        md-cols-sm="1" md-cols-md="2" md-cols-gt-md="6"
+        md-row-height-gt-md="1:1" md-row-height="2:2"
+        md-gutter="12px" md-gutter-gt-sm="8px" >
+    <md-grid-tile class="green" ng-repeat="product in store.products" ng-click="store.selectProduct(product)">
+    <md-icon md-svg-src="{{product.icon}}" style="height: 80px; width: 80px;"></md-icon>
+      <md-grid-tile-footer style="height: 100px;" ng-click="store.selectProduct(product)">
+        <h3>
+          {{product.name}}
+        </h3>
+        <h3>
+          ${{product.price | currency}} 
+        </h3>  
+        <h3>
+          <md-button class="md-raised md-primary" ng-show="product.isAvailable">Add to Cart</md-button>
+        </h3>        
+      </md-grid-tile-footer>
+    </md-grid-tile>
+  </md-grid-list>
+
+  <md-card>
+      <md-card-content>        
+        <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="description">
+        <md-content class="md-padding">
+          <p>
+          {{store.selectedProduct.description}}
+          </p>
+        </md-content>
+      </md-tab>
+      <md-tab label="reviews">
+        <md-content class="md-padding">
+          <p ng-repeat="review in store.selectedProduct.reviews">
+          {{review.content}}
+          <br>
+          -{{review.author}}
+          <md-divider></md-divider>
+          </p>
+
+          <form name="reviewForm">
+            <p ng-hide="!store.review.content">
+            {{store.review.content}}
+            <br>
+            -{{store.review.author}}
+            <md-divider></md-divider>
+            </p>
+            <md-card>
+              <md-input-container flex>
+                <label>Review</label>
+                <input ng-model="store.review.content">
+              </md-input-container>
+              <md-input-container flex>
+                <label>Email</label>
+                <input ng-model="store.review.author" type="email">
+              </md-input-container>
+              <md-button class="md-raised md-primary" ng-click="reviewForm.$valid && store.addReview(review)">Submit Review</md-button>
+            <md-card>
+          </form>
+
+        </md-content>
+      </md-tab>
+      <md-tab label="combo offers">
+        <md-content class="md-padding">
+        </md-content>
+      </md-tab>
+    </md-tabs>
+      </md-card-content>      
+    </md-card>
+    
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.4/angular-material.min.js"></script>
+  <script type="text/javascript" src="app9.js"></script>
+</body>
+</html>
